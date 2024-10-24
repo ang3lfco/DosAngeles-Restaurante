@@ -21,9 +21,10 @@ public class Reservacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="mesa_id")
     private Mesa mesa;
     @Column(name="timestamp")

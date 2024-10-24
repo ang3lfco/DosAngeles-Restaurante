@@ -23,7 +23,7 @@ public class Cliente implements Serializable {
     private String nombre;
     @Column(name="telefono")
     private String telefono;
-    @OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST)
     private List<Reservacion> reservaciones;
 
     public Cliente() {
