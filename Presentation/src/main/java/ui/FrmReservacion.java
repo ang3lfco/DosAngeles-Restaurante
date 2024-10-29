@@ -4,19 +4,61 @@
  */
 package ui;
 
+import interfaces.IClienteService;
+import interfaces.IMesaService;
+import interfaces.IReservacionService;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.Cliente;
+import models.Mesa;
+import services.ClienteService;
+import services.MesaService;
+import services.ReservacionService;
+
 /**
  *
  * @author pausa
  */
 public class FrmReservacion extends javax.swing.JFrame {
 
+    private IMesaService mesaService;
+    private IClienteService clienteService;
+    private IReservacionService reservacionService;
+    private Long idClienteSeleccionado;
+    private Long idMesaSeleccionado;
+    private List<Mesa> mesas;
+    private List<Cliente> clientes;
     /**
      * Creates new form FrmReservacion
      */
     public FrmReservacion() {
+        this.mesaService = new MesaService();
+        this.clienteService = new ClienteService();
+        this.reservacionService = new ReservacionService();
+        this.mesas = mesaService.getMesas();
+        this.clientes = clienteService.getClientes();
         initComponents();
+        cargarMesas();
+        cargarClientes();
+        setLocationRelativeTo(null);
     }
 
+    private void cargarMesas(){
+        DefaultTableModel model = (DefaultTableModel) jTableMesas.getModel();
+        for (Mesa m : mesas) {
+            model.addRow(new Object[]{m.getId(), m.getTipo(), m.getUbicacion(), m.getCapacidad(), m.getCodigoMesa()});
+        }
+    }
+    
+    private void cargarClientes(){
+        DefaultTableModel model = (DefaultTableModel) jTableClientes.getModel();
+        for(Cliente c : clientes){
+            model.addRow(new Object[]{c.getId(), c.getNombre(), c.getTelefono()});
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,47 +70,60 @@ public class FrmReservacion extends javax.swing.JFrame {
 
         LabelReservaciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMesas = new javax.swing.JTable();
         dateTimePicker1 = new com.github.lgooddatepicker.components.DateTimePicker();
         LabelFechaHora = new javax.swing.JLabel();
         LabelNumPersonas = new javax.swing.JLabel();
-        LabelTelefono = new javax.swing.JLabel();
         fieldNumPersonas = new javax.swing.JTextField();
-        fieldNumTelefono = new javax.swing.JTextField();
-        LabelTelefono1 = new javax.swing.JLabel();
-        fieldNumTelefono1 = new javax.swing.JTextField();
-        LabelTelefono2 = new javax.swing.JLabel();
-        fieldNumTelefono2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LabelReservaciones.setText("Reservaciones");
         LabelReservaciones.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tipo", "Ubicacion", "Capacidad"
+                "ID", "Tipo", "Ubicacion", "Capacidad", "CodigoMesa"
             }
-        ));
-        jTable1.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableMesas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        jScrollPane1.setViewportView(jTableMesas);
+        if (jTableMesas.getColumnModel().getColumnCount() > 0) {
+            jTableMesas.getColumnModel().getColumn(0).setMinWidth(35);
+            jTableMesas.getColumnModel().getColumn(0).setPreferredWidth(35);
+            jTableMesas.getColumnModel().getColumn(0).setMaxWidth(35);
+        }
 
         LabelFechaHora.setText("Fecha y Hora");
         LabelFechaHora.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
 
-        LabelNumPersonas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         LabelNumPersonas.setText("No. de Personas");
-
-        LabelTelefono.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        LabelTelefono.setText("Cliente");
+        LabelNumPersonas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
 
         fieldNumPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,23 +131,43 @@ public class FrmReservacion extends javax.swing.JFrame {
             }
         });
 
-        LabelTelefono1.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        LabelTelefono1.setText("Nombre(s)");
-
-        LabelTelefono2.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        LabelTelefono2.setText("Apellido(s)");
-
-        jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jButton1.setText("REALIZAR RESERVA");
+        jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COSTO:");
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Telefono"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableClientes);
+        if (jTableClientes.getColumnModel().getColumnCount() > 0) {
+            jTableClientes.getColumnModel().getColumn(0).setMinWidth(35);
+            jTableClientes.getColumnModel().getColumn(0).setPreferredWidth(35);
+            jTableClientes.getColumnModel().getColumn(0).setMaxWidth(35);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,67 +175,51 @@ public class FrmReservacion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LabelReservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(dateTimePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                        .addComponent(LabelFechaHora)
+                    .addComponent(LabelReservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(dateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LabelFechaHora)
                                 .addComponent(LabelNumPersonas)
-                                .addComponent(fieldNumPersonas))
-                            .addGap(18, 18, 18)
+                                .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(292, 292, 292)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(fieldNumTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                .addComponent(LabelTelefono)))
-                        .addComponent(LabelTelefono1)
-                        .addComponent(fieldNumTelefono2)
-                        .addComponent(LabelTelefono2)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(fieldNumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(14, 14, 14)
                 .addComponent(LabelReservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addComponent(LabelFechaHora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LabelNumPersonas)
-                            .addComponent(LabelTelefono))
+                        .addComponent(LabelNumPersonas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldNumTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LabelTelefono1)
-                        .addGap(12, 12, 12)
-                        .addComponent(fieldNumTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabelTelefono2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldNumTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,8 +229,44 @@ public class FrmReservacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNumPersonasActionPerformed
 
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt){
+        int rowCliente = jTableClientes.getSelectedRow();
+        if(rowCliente != -1){
+            idClienteSeleccionado = (Long) jTableClientes.getValueAt(rowCliente, 0);
+        }
+    }
+    
+    private void jTableMesasMouseClicked(java.awt.event.MouseEvent evt){
+        int rowMesa = jTableMesas.getSelectedRow();
+        if(rowMesa != -1){
+            idMesaSeleccionado = (Long) jTableMesas.getValueAt(rowMesa, 0);
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(idMesaSeleccionado != -1 || idClienteSeleccionado != -1){
+            String numPersonasString = fieldNumPersonas.getText();
+            int numPersonas = Integer.parseInt(numPersonasString);
+
+            for(Mesa m: mesas){
+                int costoReservacion = switch (m.getTipo()) {
+                    case "Pequeña" -> 300;
+                    case "Mediana" -> 500;
+                    case "Grande" -> 700;
+                    default -> 0;
+                };
+                if (m.getId() == idMesaSeleccionado) {
+                    for(Cliente c: clientes){
+                        if(c.getId() == idClienteSeleccionado){
+                            reservacionService.crearReservacion(c, m, dateTimePicker1.getDateTimePermissive(), numPersonas, costoReservacion);
+                        }                   
+                    }
+                }
+            }
+        } else {
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -213,17 +308,13 @@ public class FrmReservacion extends javax.swing.JFrame {
     private javax.swing.JLabel LabelFechaHora;
     private javax.swing.JLabel LabelNumPersonas;
     private javax.swing.JLabel LabelReservaciones;
-    private javax.swing.JLabel LabelTelefono;
-    private javax.swing.JLabel LabelTelefono1;
-    private javax.swing.JLabel LabelTelefono2;
     private com.github.lgooddatepicker.components.DateTimePicker dateTimePicker1;
     private javax.swing.JTextField fieldNumPersonas;
-    private javax.swing.JTextField fieldNumTelefono;
-    private javax.swing.JTextField fieldNumTelefono1;
-    private javax.swing.JTextField fieldNumTelefono2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableClientes;
+    private javax.swing.JTable jTableMesas;
     // End of variables declaration//GEN-END:variables
 }
