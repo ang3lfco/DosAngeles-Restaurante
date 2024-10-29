@@ -165,9 +165,9 @@ public class FrmMesas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String tipoMesa = (String) jComboBoxTipo.getSelectedItem();
         String ubicacionMesa = (String) jComboBoxUbicacion.getSelectedItem();
-        int capacidadMesa = (int) jComboBoxCapacidad.getSelectedItem();
+        int capacidadMesa = Integer.parseInt((String)jComboBoxCapacidad.getSelectedItem());
         
-        int cantidadMesas = (int) jComboBoxCantidad.getSelectedItem();
+        int cantidadMesas = Integer.parseInt((String)jComboBoxCantidad.getSelectedItem());
         
         
         for (int i = 0; i < cantidadMesas; i++) {
