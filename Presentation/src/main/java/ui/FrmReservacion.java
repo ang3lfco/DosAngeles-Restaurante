@@ -130,6 +130,11 @@ public class FrmReservacion extends javax.swing.JFrame {
 
         jButton1.setText("REALIZAR RESERVA");
         jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -193,7 +198,6 @@ public class FrmReservacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(LabelReservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -238,31 +242,30 @@ public class FrmReservacion extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(idMesaSeleccionado != -1 || idClienteSeleccionado != -1){
-            String numPersonasString = fieldNumPersonas.getText();
-            int numPersonas = Integer.parseInt(numPersonasString);
-
-            for(Mesa m: mesas){
-                int costoReservacion = switch (m.getTipo()) {
-                    case "Pequeña" -> 300;
-                    case "Mediana" -> 500;
-                    case "Grande" -> 700;
-                    default -> 0;
-                };
-                if (m.getId() == idMesaSeleccionado) {
-                    for(Cliente c: clientes){
-                        if(c.getId() == idClienteSeleccionado){
-                            reservacionService.crearReservacion(c, m, dateTimePicker1.getDateTimePermissive(), numPersonas, costoReservacion);
-                        }                   
-                    }
-                }
-            }
-        } else {
-            // validacion
-        }
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        String numPersonasString = fieldNumPersonas.getText();
+        int numPersonas = Integer.parseInt(numPersonasString);
+
+        for(Mesa m: mesas){
+            int costoReservacion = switch (m.getTipo()) {
+                case "Pequeña" -> 300;
+                case "Mediana" -> 500;
+                case "Grande" -> 700;
+                default -> 0;
+            };
+            if (m.getId() == idMesaSeleccionado) {
+                for(Cliente c: clientes){
+                    if(c.getId() == idClienteSeleccionado){
+                        reservacionService.crearReservacion(c, m, dateTimePicker1.getDateTimePermissive(), numPersonas, costoReservacion);
+                    }                   
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
