@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import java.util.List;
 import models.Cliente;
 
 /**
@@ -12,4 +13,5 @@ import models.Cliente;
  */
 public interface IClienteDAO {
     void crearCliente(Cliente cliente);
+    List<Cliente> getClientes();
 }

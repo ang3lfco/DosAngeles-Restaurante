@@ -5,6 +5,7 @@
 package dao;
 
 import interfaces.IMesaDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,5 +25,18 @@ public class MesaDAO implements IMesaDAO{
         em.persist(mesa);
         em.getTransaction().commit();
         em.close();
+    }
+    
+    @Override
+    public List<Mesa> getMesas(){
+        EntityManager em = emf.createEntityManager();
+        List<Mesa> mesas;
+        try{
+            mesas = em.createQuery("SELECT m FROM Mesa m", Mesa.class).getResultList();
+        }
+        finally{
+            em.close();
+        }
+        return mesas;
     }
 }

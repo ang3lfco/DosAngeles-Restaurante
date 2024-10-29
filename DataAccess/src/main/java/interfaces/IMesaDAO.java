@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import java.util.List;
 import models.Mesa;
 
 /**
@@ -12,6 +13,7 @@ import models.Mesa;
  */
 public interface IMesaDAO {
     void crearMesa(Mesa mesa);
+    List<Mesa> getMesas();
 //    public void leerMesa(int id);
 //    public void editarMesa(Mesa mesa);
 //    public void eliminarMesa(int id);

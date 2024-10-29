@@ -5,6 +5,7 @@
 package dao;
 
 import interfaces.IClienteDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,5 +25,17 @@ public class ClienteDAO implements IClienteDAO{
         em.persist(cliente);
         em.getTransaction().commit();
         em.close();
+    }
+    
+    @Override
+    public List<Cliente> getClientes(){
+        EntityManager em = emf.createEntityManager();
+        List<Cliente> clientes;
+        try {
+            clientes = em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+        } finally {
+            em.close();
+        }
+        return clientes;
     }
 }
