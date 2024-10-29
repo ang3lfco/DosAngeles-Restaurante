@@ -8,6 +8,6 @@ package services;
  *
  * @author martinez
  */
-public class ReservacionService {
+public class ClienteService {
     
 }
