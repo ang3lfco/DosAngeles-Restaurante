@@ -87,10 +87,7 @@ public class FrmReservacion extends javax.swing.JFrame {
 
         jTableMesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Tipo", "Ubicacion", "Capacidad", "CodigoMesa"
@@ -145,10 +142,7 @@ public class FrmReservacion extends javax.swing.JFrame {
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Nombre", "Telefono"
@@ -264,6 +258,7 @@ public class FrmReservacion extends javax.swing.JFrame {
                 }
             }
         } else {
+            // validacion
         }
         
         
