@@ -8,6 +8,8 @@ import dao.ReservacionDAO;
 import interfaces.IReservacionDAO;
 import interfaces.IReservacionService;
 import java.time.LocalDateTime;
+import java.util.List;
+import models.Cancelacion;
 import models.Cliente;
 import models.Mesa;
 import models.Reservacion;
@@ -27,5 +29,10 @@ public class ReservacionService implements IReservacionService{
     public void crearReservacion(Cliente cliente, Mesa mesa, LocalDateTime fechaHora, int numeroPersonas, double costoReservacion){
         Reservacion reservacion = new Reservacion(cliente, mesa, fechaHora, numeroPersonas, costoReservacion);
         reservacionDAO.crearReservacion(reservacion);
+    }
+    
+    @Override
+    public List<Reservacion> obtenerReservaciones(){
+        return reservacionDAO.getReservaciones();
     }
 }

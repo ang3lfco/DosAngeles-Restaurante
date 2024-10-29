@@ -5,8 +5,10 @@
 package interfaces;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import models.Cliente;
 import models.Mesa;
+import models.Reservacion;
 
 /**
  *
@@ -14,4 +16,5 @@ import models.Mesa;
  */
 public interface IReservacionService {
     void crearReservacion(Cliente cliente, Mesa mesa, LocalDateTime fechaHora, int numeroPersonas, double costoReservacion);
+    List<Reservacion> obtenerReservaciones();
 }
