@@ -24,6 +24,7 @@ public class FrmReportes extends javax.swing.JFrame {
     private IReservacionService reservacionService;
     private ICancelacionService cancelacionService;
     private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel2;
     /**
      * Creates new form FrmReportes
      */
@@ -86,6 +87,11 @@ public class FrmReportes extends javax.swing.JFrame {
         });
 
         jButton2.setText("Exportar PDF");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,7 +169,8 @@ public class FrmReportes extends javax.swing.JFrame {
     private void generarReporte() {
         // Limpiar la tabla antes de agregar nuevos resultados
         tableModel.setRowCount(0);
-
+        tableModel2.setRowCount(0);
+        
         // Obtener los filtros de fechas
         LocalDate fechaInicio = datePickerFechaInicio.getDate();
         LocalDate fechaFin = datePickerFechaFinal.getDate();
@@ -179,27 +186,45 @@ public class FrmReportes extends javax.swing.JFrame {
                 .filter(reservacion -> (fechaInicio == null || !reservacion.getFechaHora().toLocalDate().isBefore(fechaInicio)))
                 .filter(reservacion -> (fechaFin == null || !reservacion.getFechaHora().toLocalDate().isAfter(fechaFin)))
                 .collect(Collectors.toList());
+        
+        // Filtrar las cancelaciones por fechas
+        List<Cancelacion> cancelacionesFiltradas = cancelaciones.stream()
+                .filter(cancelacion -> (fechaInicio == null || !cancelacion.getReservacion().getFechaHora().toLocalDate().isBefore(fechaInicio)))
+                .filter(cancelacion -> (fechaFin == null || !cancelacion.getReservacion().getFechaHora().toLocalDate().isAfter(fechaFin)))
+                .collect(Collectors.toList());
 
         // Agregar las reservaciones filtradas a la tabla
-        for (Reservacion reservacion : reservacionesFiltradas) {
+        for (Reservacion r : reservacionesFiltradas) {
             tableModel.addRow(new Object[]{
-                reservacion.getFechaHora(),
-                reservacion.getCliente().getNombre(),
-                reservacion.getNumeroPersonas(),
-                reservacion.getMesa().getTipo(),
-                reservacion.getMesa().getUbicacion(),
-                reservacion.getCostoReservacion()
+                r.getFechaHora(),
+                r.getCliente().getNombre(),
+                r.getNumeroPersonas(),
+                r.getMesa().getTipo(),
+                r.getMesa().getUbicacion(),
+                r.getCostoReservacion()
+            });
+        }
+        
+        for (Cancelacion c : cancelacionesFiltradas) {
+            tableModel2.addRow(new Object[]{
+                c.getReservacion().getMesa().getId(),
+                c.getFechaCancelacion(),
+                c.getMulta()
             });
         }
     }
     
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+        generarReporte();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
