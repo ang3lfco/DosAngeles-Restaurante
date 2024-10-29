@@ -8,6 +8,7 @@ import interfaces.IClienteService;
 import interfaces.IMesaService;
 import interfaces.IReservacionService;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -79,6 +80,7 @@ public class FrmReservacion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +111,11 @@ public class FrmReservacion extends javax.swing.JFrame {
             }
         });
         jTableMesas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
+        jTableMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMesasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableMesas);
         if (jTableMesas.getColumnModel().getColumnCount() > 0) {
             jTableMesas.getColumnModel().getColumn(0).setMinWidth(35);
@@ -130,6 +137,11 @@ public class FrmReservacion extends javax.swing.JFrame {
 
         jButton1.setText("REALIZAR RESERVA");
         jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,12 +168,24 @@ public class FrmReservacion extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableClientesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableClientes);
         if (jTableClientes.getColumnModel().getColumnCount() > 0) {
             jTableClientes.getColumnModel().getColumn(0).setMinWidth(35);
             jTableClientes.getColumnModel().getColumn(0).setPreferredWidth(35);
             jTableClientes.getColumnModel().getColumn(0).setMaxWidth(35);
         }
+
+        jButton2.setText("jButton2");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +202,9 @@ public class FrmReservacion extends javax.swing.JFrame {
                                 .addComponent(LabelFechaHora)
                                 .addComponent(LabelNumPersonas)
                                 .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(292, 292, 292)
+                            .addGap(103, 103, 103)
+                            .addComponent(jButton2)
+                            .addGap(114, 114, 114)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -193,7 +219,6 @@ public class FrmReservacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(LabelReservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -210,10 +235,12 @@ public class FrmReservacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,46 +250,74 @@ public class FrmReservacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNumPersonasActionPerformed
 
-    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt){
-        int rowCliente = jTableClientes.getSelectedRow();
-        if(rowCliente != -1){
-            idClienteSeleccionado = (Long) jTableClientes.getValueAt(rowCliente, 0);
-        }
-    }
-    
-    private void jTableMesasMouseClicked(java.awt.event.MouseEvent evt){
-        int rowMesa = jTableMesas.getSelectedRow();
-        if(rowMesa != -1){
-            idMesaSeleccionado = (Long) jTableMesas.getValueAt(rowMesa, 0);
-        }
-    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(idMesaSeleccionado != -1 || idClienteSeleccionado != -1){
-            String numPersonasString = fieldNumPersonas.getText();
-            int numPersonas = Integer.parseInt(numPersonasString);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-            for(Mesa m: mesas){
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        int numPersonas = Integer.parseInt(fieldNumPersonas.getText());
+        String dateTimePickerInput = dateTimePicker1.toString();
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTimePickerInput);
+        for(Mesa m : mesas){
+            if(m.getId() == idMesaSeleccionado){
                 int costoReservacion = switch (m.getTipo()) {
                     case "Pequeña" -> 300;
                     case "Mediana" -> 500;
                     case "Grande" -> 700;
                     default -> 0;
                 };
-                if (m.getId() == idMesaSeleccionado) {
-                    for(Cliente c: clientes){
-                        if(c.getId() == idClienteSeleccionado){
-                            reservacionService.crearReservacion(c, m, dateTimePicker1.getDateTimePermissive(), numPersonas, costoReservacion);
-                        }                   
+                for(Cliente c : clientes){
+                    if(c.getId() == idClienteSeleccionado){
+                        reservacionService.crearReservacion(c, m, localDateTime, numPersonas, costoReservacion);
+                        System.out.println("CREWQEFGGVREVVWR");
                     }
                 }
             }
-        } else {
-            // validacion
         }
         
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+//        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+//        System.out.println("Fecha convertida: " + localDateTime.format(outputFormatter));
+
+//        for(Mesa m: mesas){
+//            int costoReservacion = switch (m.getTipo()) {
+//                case "Pequeña" -> 300;
+//                case "Mediana" -> 500;
+//                case "Grande" -> 700;
+//                default -> 0;
+//            };
+//            if (m.getId() == idMesaSeleccionado) {
+//                for(Cliente c: clientes){
+//                    if(c.getId() == idClienteSeleccionado){
+//                        reservacionService.crearReservacion(c, m, localDateTime, numPersonas, costoReservacion);
+//                        System.out.println("Reservacion creada");
+//                    }                   
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jTableMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMesasMouseClicked
+        // TODO add your handling code here:
+        int rowMesa = jTableMesas.getSelectedRow();
+        if(rowMesa != -1){
+            idMesaSeleccionado = (Long) jTableMesas.getValueAt(rowMesa, 0);
+        }
+    }//GEN-LAST:event_jTableMesasMouseClicked
+
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+        // TODO add your handling code here:
+        int rowCliente = jTableClientes.getSelectedRow();
+        if(rowCliente != -1){
+            idClienteSeleccionado = (Long) jTableClientes.getValueAt(rowCliente, 0);
+        }
+    }//GEN-LAST:event_jTableClientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -306,6 +361,7 @@ public class FrmReservacion extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DateTimePicker dateTimePicker1;
     private javax.swing.JTextField fieldNumPersonas;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
