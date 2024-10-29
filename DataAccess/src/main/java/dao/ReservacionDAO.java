@@ -4,6 +4,7 @@
  */
 package dao;
 import interfaces.IReservacionDAO;
+import java.util.List;
 import models.Reservacion;
 import javax.persistence.*;
 
@@ -21,5 +22,18 @@ public class ReservacionDAO implements IReservacionDAO{
         em.persist(reservacion);
         em.getTransaction().commit();
         em.close();
+    }
+    
+    @Override
+    public List<Reservacion> getReservaciones(){
+        EntityManager em = emf.createEntityManager();
+        List<Reservacion> reservaciones;
+        try{
+            reservaciones = em.createQuery("SELECT r FROM Reservacion r", Reservacion.class).getResultList();
+        }
+        finally{
+            em.close();
+        }
+        return reservaciones;
     }
 }

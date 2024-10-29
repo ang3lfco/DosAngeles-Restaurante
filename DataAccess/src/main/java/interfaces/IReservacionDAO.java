@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import java.util.List;
 import models.Reservacion;
 
 /**
@@ -12,4 +13,5 @@ import models.Reservacion;
  */
 public interface IReservacionDAO {
     void crearReservacion(Reservacion reservacion);
+    List<Reservacion> getReservaciones();
 }
