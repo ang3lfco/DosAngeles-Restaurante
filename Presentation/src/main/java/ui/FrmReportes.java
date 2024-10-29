@@ -32,6 +32,8 @@ public class FrmReportes extends javax.swing.JFrame {
         this.reservacionService = new ReservacionService();
         this.cancelacionService = new CancelacionService();
         initComponents();
+        this.tableModel = (DefaultTableModel) jTable1.getModel();
+        this.tableModel2 = (DefaultTableModel) jTable2.getModel();
     }
 
     /**
@@ -87,6 +89,11 @@ public class FrmReportes extends javax.swing.JFrame {
         });
 
         jButton2.setText("Exportar PDF");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -225,6 +232,43 @@ public class FrmReportes extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    /**
+     * 
+     * @param model
+     * @return Regresa un Arreglo Bidimensional con los datos de la tabla
+     */
+    private Object[][] obtenerDatosDeTabla(DefaultTableModel model) {
+        int rowCount = model.getRowCount();
+        int columnCount = model.getColumnCount();
+        Object[][] datos = new Object[rowCount][columnCount];
+        
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                datos[i][j] = model.getValueAt(i, j);
+            }
+        }
+        return datos;
+    }
+
+    /**
+     * Método que regresa
+     * @param model
+     * @return Regresa un Arreglo con el encabezado de la tabla
+     */
+    private String[] obtenerColumnasDeTabla(DefaultTableModel model) {
+        int columnCount = model.getColumnCount();
+        String[] columnas = new String[columnCount];
+        
+        for (int i = 0; i < columnCount; i++) {
+            columnas[i] = model.getColumnName(i);
+        }
+        return columnas;
+    }
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
