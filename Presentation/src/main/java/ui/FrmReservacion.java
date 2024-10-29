@@ -75,11 +75,11 @@ public class FrmReservacion extends javax.swing.JFrame {
         LabelReservaciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMesas = new javax.swing.JTable();
-        dateTimePicker1 = new com.github.lgooddatepicker.components.DateTimePicker();
+        dateTimePickerFechaHora = new com.github.lgooddatepicker.components.DateTimePicker();
         LabelFechaHora = new javax.swing.JLabel();
         LabelNumPersonas = new javax.swing.JLabel();
-        fieldNumPersonas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txfNumPersonas = new javax.swing.JTextField();
+        btnReservar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
@@ -132,22 +132,22 @@ public class FrmReservacion extends javax.swing.JFrame {
         LabelNumPersonas.setText("No. de Personas");
         LabelNumPersonas.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
 
-        fieldNumPersonas.addActionListener(new java.awt.event.ActionListener() {
+        txfNumPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNumPersonasActionPerformed(evt);
+                txfNumPersonasActionPerformed(evt);
             }
         });
 
-        jButton1.setText("REALIZAR RESERVA");
-        jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReservar.setText("REALIZAR RESERVA");
+        btnReservar.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        btnReservar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnReservarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnReservarActionPerformed(evt);
             }
         });
 
@@ -201,15 +201,15 @@ public class FrmReservacion extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(dateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dateTimePickerFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(LabelFechaHora)
                                 .addComponent(LabelNumPersonas)
-                                .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txfNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(103, 103, 103)
                             .addComponent(jButton2)
                             .addGap(114, 114, 114)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnReservar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,37 +232,48 @@ public class FrmReservacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LabelFechaHora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dateTimePickerFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LabelNumPersonas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txfNumPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btnReservar)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldNumPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNumPersonasActionPerformed
+    private void txfNumPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNumPersonasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNumPersonasActionPerformed
+    }//GEN-LAST:event_txfNumPersonasActionPerformed
 
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnReservarActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnReservarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservarMouseClicked
         // TODO add your handling code here:
-        int numPersonas = Integer.parseInt(fieldNumPersonas.getText());
-        String dateTimePickerInput = dateTimePicker1.toString();
+        if (txfNumPersonas.getText().isEmpty() || Integer.parseInt(txfNumPersonas.getText()) == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el numero de personas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int numPersonas;
+        try {
+            numPersonas = Integer.parseInt(txfNumPersonas.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo numeros enteros en el campo de personas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String dateTimePickerInput = dateTimePickerFechaHora.toString();
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimePickerInput);
+        
         for(Mesa m : mesas){
             if(m.getId() == idMesaSeleccionado){
                 int costoReservacion = switch (m.getTipo()) {
@@ -280,26 +291,7 @@ public class FrmReservacion extends javax.swing.JFrame {
             }
         }
         
-//        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-//        System.out.println("Fecha convertida: " + localDateTime.format(outputFormatter));
-
-//        for(Mesa m: mesas){
-//            int costoReservacion = switch (m.getTipo()) {
-//                case "Pequeña" -> 300;
-//                case "Mediana" -> 500;
-//                case "Grande" -> 700;
-//                default -> 0;
-//            };
-//            if (m.getId() == idMesaSeleccionado) {
-//                for(Cliente c: clientes){
-//                    if(c.getId() == idClienteSeleccionado){
-//                        reservacionService.crearReservacion(c, m, localDateTime, numPersonas, costoReservacion);
-//                        System.out.println("Reservacion creada");
-//                    }                   
-//                }
-//            }
-//        }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnReservarMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
@@ -361,14 +353,14 @@ public class FrmReservacion extends javax.swing.JFrame {
     private javax.swing.JLabel LabelFechaHora;
     private javax.swing.JLabel LabelNumPersonas;
     private javax.swing.JLabel LabelReservaciones;
-    private com.github.lgooddatepicker.components.DateTimePicker dateTimePicker1;
-    private javax.swing.JTextField fieldNumPersonas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnReservar;
+    private com.github.lgooddatepicker.components.DateTimePicker dateTimePickerFechaHora;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableClientes;
     private javax.swing.JTable jTableMesas;
+    private javax.swing.JTextField txfNumPersonas;
     // End of variables declaration//GEN-END:variables
 }

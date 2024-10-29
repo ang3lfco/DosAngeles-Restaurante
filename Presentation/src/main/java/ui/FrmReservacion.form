@@ -30,16 +30,16 @@
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="dateTimePicker1" min="-2" pref="260" max="-2" attributes="0"/>
+                              <Component id="dateTimePickerFechaHora" min="-2" pref="260" max="-2" attributes="0"/>
                               <Component id="LabelFechaHora" max="-2" attributes="0"/>
                               <Component id="LabelNumPersonas" max="-2" attributes="0"/>
-                              <Component id="fieldNumPersonas" min="-2" pref="87" max="-2" attributes="0"/>
+                              <Component id="txfNumPersonas" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton1" min="-2" pref="260" max="-2" attributes="0"/>
+                              <Component id="btnReservar" min="-2" pref="260" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" pref="260" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -71,11 +71,11 @@
                   <Group type="102" attributes="0">
                       <Component id="LabelFechaHora" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="dateTimePicker1" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateTimePickerFechaHora" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="LabelNumPersonas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldNumPersonas" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfNumPersonas" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -83,7 +83,7 @@
                           <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnReservar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="52" max="32767" attributes="0"/>
@@ -160,7 +160,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dateTimePicker1">
+    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dateTimePickerFechaHora">
     </Component>
     <Component class="javax.swing.JLabel" name="LabelFechaHora">
       <Properties>
@@ -178,12 +178,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fieldNumPersonas">
+    <Component class="javax.swing.JTextField" name="txfNumPersonas">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldNumPersonasActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfNumPersonasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnReservar">
       <Properties>
         <Property name="text" type="java.lang.String" value="REALIZAR RESERVA"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -191,8 +191,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnReservarMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReservarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
