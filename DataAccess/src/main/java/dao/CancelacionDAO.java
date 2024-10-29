@@ -8,14 +8,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import models.Cancelacion;
+import interfaces.ICancelacionDAO;
 
 /**
  *
  * @author martinez
  */
-public class CancelacionDAO {
+public class CancelacionDAO implements ICancelacionDAO{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_DataAccess_jar_1.0-SNAPSHOTPU");
     
+    @Override
     public void crearCancelacion(Cancelacion cancelacion){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

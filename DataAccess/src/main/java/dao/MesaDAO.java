@@ -4,6 +4,7 @@
  */
 package dao;
 
+import interfaces.IMesaDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,9 +14,10 @@ import models.Mesa;
  *
  * @author martinez
  */
-public class MesaDAO {
+public class MesaDAO implements IMesaDAO{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_DataAccess_jar_1.0-SNAPSHOTPU");
     
+    @Override
     public void crearMesa(Mesa mesa){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
