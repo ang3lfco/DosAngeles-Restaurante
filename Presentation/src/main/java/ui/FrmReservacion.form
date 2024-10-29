@@ -96,7 +96,7 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservaciones"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Roboto Medium" size="24" style="0"/>
+          <Font name="Segoe UI Black" size="24" style="1"/>
         </Property>
       </Properties>
     </Component>

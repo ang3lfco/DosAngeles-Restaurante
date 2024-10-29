@@ -35,12 +35,14 @@ public class FrmReservacion extends javax.swing.JFrame {
      * Creates new form FrmReservacion
      */
     public FrmReservacion() {
+        initComponents();
+        setLocationRelativeTo(null);
         this.mesaService = new MesaService();
         this.clienteService = new ClienteService();
         this.reservacionService = new ReservacionService();
         this.mesas = mesaService.getMesas();
         this.clientes = clienteService.getClientes();
-        initComponents();
+        
         cargarMesas();
         cargarClientes();
         setLocationRelativeTo(null);
@@ -85,7 +87,7 @@ public class FrmReservacion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LabelReservaciones.setText("Reservaciones");
-        LabelReservaciones.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
+        LabelReservaciones.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
 
         jTableMesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

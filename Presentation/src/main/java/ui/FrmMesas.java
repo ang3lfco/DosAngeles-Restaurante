@@ -20,6 +20,7 @@ public class FrmMesas extends javax.swing.JFrame {
      */
     public FrmMesas() {
         initComponents();
+        setLocationRelativeTo(null);
         this.mesaService = new MesaService();
     }
 
