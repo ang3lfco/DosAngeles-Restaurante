@@ -4,6 +4,7 @@
  */
 package ui;
 
+import GeneradorPDF.GeneradorPDF;
 import interfaces.ICancelacionService;
 import interfaces.IReservacionService;
 import java.time.LocalDate;
@@ -267,7 +268,12 @@ public class FrmReportes extends javax.swing.JFrame {
     }
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
+        GeneradorPDF pdf = new GeneradorPDF(
+                obtenerDatosDeTabla(tableModel), 
+                obtenerColumnasDeTabla(tableModel), 
+                obtenerDatosDeTabla(tableModel2), 
+                obtenerColumnasDeTabla(tableModel2));
+        pdf.guardarPDF();
     }//GEN-LAST:event_jButton2MouseClicked
 
 //    /**
