@@ -6,6 +6,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -73,30 +74,31 @@ public class Cliente implements Serializable {
     public void setReservaciones(List<Reservacion> reservaciones) {
         this.reservaciones = reservaciones;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cliente other = (Cliente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Cliente other = (Cliente) obj;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "models.Cliente[ id=" + id + " ]";
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", reservaciones=" + reservaciones + '}';
     }
-    
 }

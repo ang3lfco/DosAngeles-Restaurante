@@ -6,6 +6,7 @@ package models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -52,29 +53,54 @@ public class Cancelacion implements Serializable {
         this.id = id;
     }
 
+    public Reservacion getReservacion() {
+        return reservacion;
+    }
+
+    public void setReservacion(Reservacion reservacion) {
+        this.reservacion = reservacion;
+    }
+
+    public LocalDateTime getFechaCancelacion() {
+        return fechaCancelacion;
+    }
+
+    public void setFechaCancelacion(LocalDateTime fechaCancelacion) {
+        this.fechaCancelacion = fechaCancelacion;
+    }
+
+    public double getMulta() {
+        return multa;
+    }
+
+    public void setMulta(double multa) {
+        this.multa = multa;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cancelacion)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cancelacion other = (Cancelacion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Cancelacion other = (Cancelacion) obj;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "models.Cancelacion[ id=" + id + " ]";
+        return "Cancelacion{" + "id=" + id + ", reservacion=" + reservacion + ", fechaCancelacion=" + fechaCancelacion + ", multa=" + multa + '}';
     }
-    
 }
