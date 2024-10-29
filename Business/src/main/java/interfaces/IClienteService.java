@@ -5,6 +5,7 @@
 package interfaces;
 
 import java.util.List;
+import models.Cliente;
 import models.Reservacion;
 
 /**
@@ -13,4 +14,5 @@ import models.Reservacion;
  */
 public interface IClienteService {
     void crearCliente(String nombre, String telefono, List<Reservacion> reservaciones);
+    List<Cliente> getClientes();
 }

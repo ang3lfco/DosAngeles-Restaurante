@@ -27,4 +27,8 @@ public class ClienteService implements IClienteService{
         Cliente cliente = new Cliente(nombre, telefono, reservaciones);
         clienteDAO.crearCliente(cliente);
     }
+    
+    public List<Cliente> getClientes(){
+        return clienteDAO.getClientes();
+    }
 }

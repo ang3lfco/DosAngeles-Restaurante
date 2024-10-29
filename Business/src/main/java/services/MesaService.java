@@ -7,6 +7,7 @@ package services;
 import dao.MesaDAO;
 import interfaces.IMesaDAO;
 import interfaces.IMesaService;
+import java.util.List;
 import models.Mesa;
 
 /**
@@ -25,5 +26,10 @@ public class MesaService implements IMesaService{
     {
         Mesa mesa = new Mesa(tipo, ubicacion, capacidad, codigoMesa);
         mesaDAO.crearMesa(mesa);
+    }
+    
+    @Override
+    public List<Mesa> getMesas(){
+        return mesaDAO.getMesas();
     }
 }

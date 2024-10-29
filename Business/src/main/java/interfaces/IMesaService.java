@@ -4,10 +4,14 @@
  */
 package interfaces;
 
+import java.util.List;
+import models.Mesa;
+
 /**
  *
  * @author angelsn
  */
 public interface IMesaService {
     void crearMesa(String tipo, String ubicacion, int capacidad, String codigoMesa);
+    List<Mesa> getMesas();
 }
