@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import models.Cancelacion;
 import interfaces.ICancelacionDAO;
+import java.util.List;
 
 /**
  *
@@ -24,5 +25,18 @@ public class CancelacionDAO implements ICancelacionDAO{
         em.persist(cancelacion);
         em.getTransaction().commit();
         em.close();
+    }
+    
+    @Override
+    public List<Cancelacion> getCancelaciones(){
+        EntityManager em = emf.createEntityManager();
+        List<Cancelacion> cancelaciones;
+        try{
+            cancelaciones = em.createQuery("SELECT can FROM Cancelacion can", Cancelacion.class).getResultList();
+        }
+        finally{
+            em.close();
+        }
+        return cancelaciones;
     }
 }

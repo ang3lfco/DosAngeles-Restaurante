@@ -8,6 +8,7 @@ import dao.CancelacionDAO;
 import interfaces.ICancelacionDAO;
 import interfaces.ICancelacionService;
 import java.time.LocalDateTime;
+import java.util.List;
 import models.Cancelacion;
 import models.Reservacion;
 
@@ -26,5 +27,9 @@ public class CancelacionService implements ICancelacionService{
     public void crearCancelacion(Reservacion reservacion, LocalDateTime fechaCancelacion, double multa){
         Cancelacion cancelacion = new Cancelacion(reservacion, fechaCancelacion, multa);
         cancelacionDAO.crearCancelacion(cancelacion);
+    }
+    
+    public List<Cancelacion> getCancelaciones(){
+        return cancelacionDAO.getCancelaciones();
     }
 }

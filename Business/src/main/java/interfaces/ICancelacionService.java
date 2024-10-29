@@ -5,6 +5,8 @@
 package interfaces;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import models.Cancelacion;
 import models.Reservacion;
 
 /**
@@ -13,4 +15,5 @@ import models.Reservacion;
  */
 public interface ICancelacionService {
     void crearCancelacion(Reservacion reservacion, LocalDateTime fechaCancelacion, double multa);
+    List<Cancelacion> getCancelaciones();
 }

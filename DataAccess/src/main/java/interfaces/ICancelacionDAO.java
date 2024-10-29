@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import java.util.List;
 import models.Cancelacion;
 
 /**
@@ -12,6 +13,7 @@ import models.Cancelacion;
  */
 public interface ICancelacionDAO {
     void crearCancelacion(Cancelacion cancelacion);
+    List<Cancelacion> getCancelaciones();
 //    public void leerCancelacion(int id);
 //    public void editarCancelacion(Cancelacion cancelacion);
 //    public void eliminarCancelacion(int id);
