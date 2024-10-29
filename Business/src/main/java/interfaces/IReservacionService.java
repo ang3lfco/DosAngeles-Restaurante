@@ -4,10 +4,14 @@
  */
 package interfaces;
 
+import java.time.LocalDateTime;
+import models.Cliente;
+import models.Mesa;
+
 /**
  *
  * @author martinez
  */
 public interface IReservacionService {
-    
+    void crearReservacion(Cliente cliente, Mesa mesa, LocalDateTime fechaHora, int numeroPersonas, double costoReservacion);
 }

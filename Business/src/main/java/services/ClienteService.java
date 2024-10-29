@@ -4,10 +4,27 @@
  */
 package services;
 
+import dao.ClienteDAO;
+import interfaces.IClienteDAO;
+import interfaces.IClienteService;
+import java.util.List;
+import models.Cliente;
+import models.Reservacion;
+
 /**
  *
  * @author martinez
  */
-public class ClienteService {
+public class ClienteService implements IClienteService{
+    private final IClienteDAO clienteDAO;
     
+    public ClienteService(){
+        this.clienteDAO = new ClienteDAO();
+    }
+    
+    @Override
+    public void crearCliente(String nombre, String telefono, List<Reservacion> reservaciones){
+        Cliente cliente = new Cliente(nombre, telefono, reservaciones);
+        clienteDAO.crearCliente(cliente);
+    }
 }

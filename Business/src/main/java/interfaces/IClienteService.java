@@ -4,10 +4,13 @@
  */
 package interfaces;
 
+import java.util.List;
+import models.Reservacion;
+
 /**
  *
  * @author martinez
  */
 public interface IClienteService {
-    
+    void crearCliente(String nombre, String telefono, List<Reservacion> reservaciones);
 }

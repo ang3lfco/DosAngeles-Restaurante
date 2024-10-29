@@ -74,8 +74,6 @@ public class Cliente implements Serializable {
         this.reservaciones = reservaciones;
     }
     
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
