@@ -4,10 +4,12 @@
  */
 package interfaces;
 
+import models.Reservacion;
+
 /**
  *
  * @author martinez
  */
 public interface IReservacionDAO {
-    
+    void crearReservacion(Reservacion reservacion);
 }

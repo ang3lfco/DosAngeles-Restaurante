@@ -4,10 +4,12 @@
  */
 package interfaces;
 
+import models.Cliente;
+
 /**
  *
  * @author martinez
  */
 public interface IClienteDAO {
-    
+    void crearCliente(Cliente cliente);
 }

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import interfaces.IClienteDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,9 +14,10 @@ import models.Cliente;
  *
  * @author martinez
  */
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_DataAccess_jar_1.0-SNAPSHOTPU");
     
+    @Override
     public void crearCliente(Cliente cliente){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

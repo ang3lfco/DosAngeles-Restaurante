@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
+import interfaces.IReservacionDAO;
 import models.Reservacion;
 import javax.persistence.*;
 
@@ -10,9 +11,10 @@ import javax.persistence.*;
  *
  * @author martinez
  */
-public class ReservacionDAO {
+public class ReservacionDAO implements IReservacionDAO{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_DataAccess_jar_1.0-SNAPSHOTPU");
     
+    @Override
     public void crearReservacion(Reservacion reservacion){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
